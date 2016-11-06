@@ -18,6 +18,7 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         setNavBar()
+        setNavTitleFont()
         
         delegate = self
         
@@ -30,7 +31,6 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Log Out", style: .plain, target: self, action: #selector(handleLogout))
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Message", style: .plain, target: self, action: #selector(handleMessage))
         navigationItem.title="P R E F E"
-        setNavBarFont()
     }
     
     func handleLogout(){
@@ -57,7 +57,7 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
         present(navController, animated: true, completion: nil)
     }
     
-    func setNavBarFont(){
+    func setNavTitleFont(){
         if let navBarFont=UIFont(name: "Arial",size: 15.0){
             UINavigationBar.appearance().titleTextAttributes = [NSFontAttributeName: navBarFont]
         }
@@ -68,32 +68,38 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
         
         let item1 = HomeController()
         item1.mainController = self
-        let image1 = UIImage(named: "Optimized-profile")
+        let image1 = UIImage(named: "home")
         let icon1 = UITabBarItem(title: "Home", image: image1, selectedImage: image1)
         item1.tabBarItem = icon1
         
         let item2 = SearchController()
         item2.mainController = self
-        let image2 = UIImage(named: "Optimized-profile")
-        let icon2 = UITabBarItem(title: "Feed", image: image2, selectedImage: image2)
+        let image2 = UIImage(named: "search")
+        let icon2 = UITabBarItem(title: "Search", image: image2, selectedImage: image2)
         item2.tabBarItem = icon2
         
         let item3 = HookController()
         item3.mainController = self
-        let image3 = UIImage(named: "Optimized-profile")
-        let icon3 = UITabBarItem(title: "Activities", image: image3, selectedImage: image3)
+        let image3 = UIImage(named: "hook")
+        let icon3 = UITabBarItem(title: "Hook", image: image3, selectedImage: image3)
         item3.tabBarItem = icon3
         
         let item4 = NotificationController()
         item4.mainController = self
-        let image4 = UIImage(named: "Optimized-profile")
-        let icon4 = UITabBarItem(title: "Activities", image: image4, selectedImage: image4)
+        let image4 = UIImage(named: "notifications")
+        let icon4 = UITabBarItem(title: "Notifications", image: image4, selectedImage: image4)
         item4.tabBarItem = icon4
         let item5 = ProfileController()
         
         item5.mainController = self
-        let image5 = UIImage(named: "Optimized-profile")
-        let icon5 = UITabBarItem(title: "Profile", image: image5, selectedImage: image5)
+        let image5 = UIImage(named: "roundedMe")
+        let imageView = UIImageView(frame: CGRect(x:0,y:0,width: 20, height: 20))
+        UIGraphicsBeginImageContextWithOptions(imageView.bounds.size, false, UIScreen.main.scale)
+        UIBezierPath(roundedRect: imageView.bounds, cornerRadius:10.0).addClip()
+        image5?.draw(in: imageView.bounds)
+        imageView.image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        let icon5 = UITabBarItem(title: "My Page", image: imageView.image, selectedImage: imageView.image)
         item5.tabBarItem = icon5
         
         let controllers = [item1, item2, item3, item4, item5]

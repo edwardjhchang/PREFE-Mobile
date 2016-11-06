@@ -11,16 +11,19 @@ import UIKit
 class HomeController: UITableViewController {
 
     var mainController: TabBarController?
+    
     let cellId = "cellId"
     var posts = [Post]()
-    var pictureHeight: CGFloat?
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         mainController?.changeSelected(select: 0)
+        mainController?.setNavBar()
         
         tableView.register(PostCell.self, forCellReuseIdentifier: cellId)
         fetchPosts()
+        
+        //tableView.allowsSelection = false
     }
     
     //Check if user is logged in. If not, move to the login page automatically
@@ -87,10 +90,10 @@ class HomeController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! PostCell
-        let post = posts[indexPath.row]
-        cell.textLabel?.text = post.posterID
-        cell.detailTextLabel?.text = post.caption
-        cell.postImageView.image = UIImage(named: "long")
+        //let post = posts[indexPath.row]
+        //cell.textLabel?.text = post.posterID
+        //cell.detailTextLabel?.text = post.caption
+        cell.postImageView.image = UIImage(named: "me")
         cell.pictureHeight = (mainController?.screenWidth)!
         /*
         let imageSize = cell.postImageView.image?.size
@@ -107,6 +110,6 @@ class HomeController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 400
+        return (mainController?.screenWidth)!+20
     }
 }

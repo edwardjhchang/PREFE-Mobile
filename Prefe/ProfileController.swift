@@ -9,6 +9,7 @@
 import UIKit
 
 class ProfileController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    
     var mainController: TabBarController?
     var colView: UICollectionView!
     
@@ -21,16 +22,21 @@ class ProfileController: UIViewController, UICollectionViewDataSource, UICollect
     var numDetailTextLines = 0
     let nameTextFontSize:CGFloat = 12.0
     let detailTextFontSize:CGFloat = 10.0
-    var pictureHeight: CGFloat = 250.0
+    var pictureHeight: CGFloat?
     let maxCharInLine = 57
+    
+    var listButton: UIButton?
+    var gridButton: UIButton?
+    //var layoutControl: UISegmentedControl?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         mainController?.changeSelected(select: 4)
+        pictureHeight = (mainController?.screenWidth)! - 40
         
         let layout = UICollectionViewFlowLayout()
-        layout.sectionInset = UIEdgeInsets(top: 20, left: 10, bottom: 10, right: 10)
-        layout.itemSize = CGSize(width: pictureHeight, height: pictureHeight+40)
+        layout.sectionInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+        layout.itemSize = CGSize(width: pictureHeight!, height: pictureHeight!+40)
         
         colView = UICollectionView(frame: self.view.frame, collectionViewLayout: layout)
         colView.delegate   = self
@@ -38,6 +44,7 @@ class ProfileController: UIViewController, UICollectionViewDataSource, UICollect
         colView.register(MyPostCell.self, forCellWithReuseIdentifier: cellId)
         colView.backgroundColor = UIColor.white
         colView.register(ProfileHeader.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: headerId)
+        colView.allowsSelection = false
         
         fetchUser()
         fetchPosts()
@@ -69,13 +76,34 @@ class ProfileController: UIViewController, UICollectionViewDataSource, UICollect
         if user.organization != nil {
             numDetailTextLines += 1
         }
-        print(numDetailTextLines)
     }
     
     func setupViews() {
         setupNavBar()
-        
         self.view.addSubview(colView)
+        
+        /*
+         layoutControl = UISegmentedControl()
+         layoutControl?.translatesAutoresizingMaskIntoConstraints = false
+         layoutControl?.backgroundColor = UIColor.white
+         layoutControl?.insertSegment(with: UIImage(named: "findFriends"), at: 0, animated: false)
+         layoutControl?.insertSegment(with: UIImage(named: "settings"), at:1, animated: false)
+         
+         layoutControl?.addTarget(self, action: #selector(handleChangeLayout), for: .valueChanged)*/
+        
+        listButton = UIButton()
+        var image = UIImage(named: "listlayout")
+        listButton?.backgroundColor = UIColor.white
+        listButton?.setImage(image, for: .normal)
+        listButton?.translatesAutoresizingMaskIntoConstraints = false
+        listButton?.addTarget(self, action: #selector(handleChangeLayout), for: .touchDown)
+        
+        gridButton = UIButton()
+        image = UIImage(named: "gridlayout")
+        gridButton?.backgroundColor = UIColor.white
+        gridButton?.setImage(image, for: .normal)
+        gridButton?.translatesAutoresizingMaskIntoConstraints = false
+        gridButton?.addTarget(self, action: #selector(handleChangeLayout), for: .touchDown)
     }
     
     func setupNavBar(){
@@ -123,6 +151,7 @@ class ProfileController: UIViewController, UICollectionViewDataSource, UICollect
         cell.textLabel.text = "Edward Chang"
         cell.detailTextLabel.text = "Caption"
         cell.postImageView.image = UIImage(named: "me")
+        cell.pictureHeight = (mainController?.screenWidth)!
         return cell
     }
     
@@ -130,12 +159,25 @@ class ProfileController: UIViewController, UICollectionViewDataSource, UICollect
         return 1
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if indexPath.row == 1 {
+            let layout = UICollectionViewFlowLayout()
+            layout.sectionInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+            layout.itemSize = CGSize(width: 100, height: 100)
+            
+            UIView.animate(withDuration: 0.3, animations: {() -> Void in
+                self.colView.collectionViewLayout.invalidateLayout()
+                self.colView.setCollectionViewLayout(layout, animated: true)
+            })
+        }
+    }
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return posts.count
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        return CGSize(width: view.frame.width, height: CGFloat(123+12*numDetailTextLines))
+        return CGSize(width: view.frame.width, height: CGFloat(140+12*numDetailTextLines))
     }
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
@@ -156,6 +198,14 @@ class ProfileController: UIViewController, UICollectionViewDataSource, UICollect
             header.bioTextLabel.font = detailTextFont
         }
         header.bioTextLabel.heightAnchor.constraint(equalToConstant: CGFloat(12*numDetailTextLines)).isActive = true
+
+        header.listButton = listButton
+        header.gridButton = gridButton
+        //header.layoutControl = layoutControl
         return header
+    }
+    
+    func handleChangeLayout() {
+        print(123)
     }
 }

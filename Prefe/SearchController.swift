@@ -22,8 +22,11 @@ class SearchController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         mainController?.changeSelected(select: 1)
+        mainController?.setNavBar()
+        
         view.addSubview(inputTextField)
         setupInputTextField()
+        
     }
     func setupInputTextField() {
         let containerView = UIView()

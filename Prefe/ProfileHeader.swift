@@ -9,11 +9,16 @@
 import UIKit
 
 class ProfileHeader: UICollectionViewCell {
-    let pictureHeight: CGFloat = 74
+    let headerHeight: CGFloat = 74.0
+    
+    //var layoutControl: UISegmentedControl?
+    var gridButton: UIButton?
+    var listButton: UIButton?
     
     override init(frame: CGRect){
         super.init(frame: frame)
         setupViews()
+        
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -58,35 +63,17 @@ class ProfileHeader: UICollectionViewCell {
         return view
     }()
     
-    let gridButton: UIButton = {
-        let button = UIButton()
-        button.backgroundColor = UIColor.blue
-        button.setTitle("Yeah", for: .normal)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        return button
-    }()
-    
-    let listButton: UIButton = {
-        let button = UIButton()
-        button.backgroundColor = UIColor.blue
-        button.setTitle("Yeah", for: .normal)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        return button
-    }()
-    
     func setupViews(){
         backgroundColor = UIColor.clear
         addSubview(textLabel)
         addSubview(bioTextLabel)
         addSubview(profileImageView)
         addSubview(headerLine)
-        addSubview(gridButton)
-        addSubview(listButton)
         
         profileImageView.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 20).isActive=true
         profileImageView.topAnchor.constraint(equalTo: self.topAnchor, constant: 20).isActive=true
-        profileImageView.widthAnchor.constraint(equalToConstant: pictureHeight).isActive=true
-        profileImageView.heightAnchor.constraint(equalToConstant: pictureHeight).isActive=true
+        profileImageView.widthAnchor.constraint(equalToConstant: headerHeight).isActive=true
+        profileImageView.heightAnchor.constraint(equalToConstant: headerHeight).isActive=true
         
         textLabel.leftAnchor.constraint(equalTo: profileImageView.leftAnchor).isActive=true
         textLabel.topAnchor.constraint(equalTo: profileImageView.bottomAnchor).isActive=true
@@ -101,16 +88,27 @@ class ProfileHeader: UICollectionViewCell {
         headerLine.topAnchor.constraint(equalTo: bioTextLabel.bottomAnchor, constant: 3).isActive = true
         headerLine.widthAnchor.constraint(equalTo: self.widthAnchor, constant: -32).isActive = true
         headerLine.heightAnchor.constraint(equalToConstant: 1).isActive = true
-        
-        gridButton.leftAnchor.constraint(equalTo: profileImageView.leftAnchor).isActive = true
-        gridButton.topAnchor.constraint(equalTo: headerLine.bottomAnchor, constant: 5).isActive = true
-        gridButton.widthAnchor.constraint(equalToConstant: 20).isActive = true
-        gridButton.heightAnchor.constraint(equalToConstant: 20).isActive = true
-        
-        listButton.leftAnchor.constraint(equalTo: gridButton.rightAnchor, constant: 10).isActive = true
-        listButton.topAnchor.constraint(equalTo: headerLine.bottomAnchor, constant: 5).isActive = true
-        listButton.widthAnchor.constraint(equalToConstant: 20).isActive = true
-        listButton.heightAnchor.constraint(equalToConstant: 20).isActive = true
     }
-
+    override func layoutSubviews() {
+        
+        addSubview((gridButton)!)
+        addSubview((listButton)!)
+        
+        listButton?.leftAnchor.constraint(equalTo: profileImageView.leftAnchor).isActive = true
+        listButton?.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
+        listButton?.widthAnchor.constraint(equalToConstant: 20).isActive = true
+        listButton?.heightAnchor.constraint(equalToConstant: 20).isActive = true
+        
+        gridButton?.leftAnchor.constraint(equalTo: (listButton?.rightAnchor)!, constant: 10).isActive = true
+        gridButton?.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
+        gridButton?.widthAnchor.constraint(equalToConstant: 20).isActive = true
+        gridButton?.heightAnchor.constraint(equalToConstant: 20).isActive = true
+        
+        /*
+        addSubview((layoutControl)!)
+        layoutControl?.leftAnchor.constraint(equalTo: profileImageView.leftAnchor).isActive = true
+        layoutControl?.topAnchor.constraint(equalTo: headerLine.bottomAnchor, constant: 5).isActive = true
+        layoutControl?.widthAnchor.constraint(equalToConstant: 45).isActive = true
+        layoutControl?.heightAnchor.constraint(equalToConstant: 20).isActive = true*/
+    }
 }

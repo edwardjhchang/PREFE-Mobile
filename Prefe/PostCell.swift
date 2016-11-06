@@ -13,8 +13,8 @@ class PostCell: UITableViewCell {
     
     override func layoutSubviews(){
         super.layoutSubviews()
-        textLabel?.frame = CGRect(x: textLabel!.frame.origin.x, y: pictureHeight!+10, width: textLabel!.frame.width, height: textLabel!.frame.height)
-        detailTextLabel?.frame = CGRect(x: textLabel!.frame.origin.x, y: pictureHeight!+30, width: detailTextLabel!.frame.width, height: detailTextLabel!.frame.height)
+        //textLabel?.frame = CGRect(x: textLabel!.frame.origin.x, y: pictureHeight!+10, width: textLabel!.frame.width, height: textLabel!.frame.height)
+        //detailTextLabel?.frame = CGRect(x: textLabel!.frame.origin.x, y: pictureHeight!+30, width: detailTextLabel!.frame.width, height: detailTextLabel!.frame.height)
     }
     
     var postImageView: UIImageView = {
