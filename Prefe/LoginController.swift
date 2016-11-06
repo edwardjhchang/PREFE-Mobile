@@ -169,7 +169,7 @@ class LoginController: UIViewController {
         loginRegisterButton.setTitle(title, for: .normal)
         
         //change height of inputsContainerView
-        inputsContainerViewHeightAnchor?.constant = loginRegisterSegmentedControl.selectedSegmentIndex == 0 ? 100 : 150
+        inputsContainerViewHeightAnchor?.constant = loginRegisterSegmentedControl.selectedSegmentIndex == 0 ? 100 : 120
         
         //change height of nameTextField
         nameTextFieldHeightAnchor?.isActive = false
@@ -226,7 +226,7 @@ class LoginController: UIViewController {
         inputsContainerView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         inputsContainerView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
         inputsContainerView.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -24).isActive = true
-        inputsContainerViewHeightAnchor = inputsContainerView.heightAnchor.constraint(equalToConstant: 150)
+        inputsContainerViewHeightAnchor = inputsContainerView.heightAnchor.constraint(equalToConstant: 120)
         inputsContainerViewHeightAnchor?.isActive = true
         
         //need x, y, width, height constraints

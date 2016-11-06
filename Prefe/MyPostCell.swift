@@ -10,7 +10,7 @@ import UIKit
 
 class MyPostCell: UICollectionViewCell{
     var pictureHeight:CGFloat?
-    var leftIndent:CGFloat = 0.0
+    var listLayoutInUse:Bool = true
     
     override init(frame: CGRect){
         super.init(frame: frame)
@@ -44,24 +44,38 @@ class MyPostCell: UICollectionViewCell{
     }()
     
     func setupViews(){
-        backgroundColor = UIColor.clear
+        backgroundColor = UIColor.white
         addSubview(textLabel)
         addSubview(detailTextLabel)
         addSubview(postImageView)
         
-        postImageView.centerXAnchor.constraint(equalTo: self.centerXAnchor, constant: leftIndent).isActive=true
-        postImageView.topAnchor.constraint(equalTo: self.topAnchor, constant: leftIndent).isActive=true
+        postImageView.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive=true
+        postImageView.topAnchor.constraint(equalTo: self.topAnchor).isActive=true
         postImageView.widthAnchor.constraint(equalTo: self.widthAnchor).isActive=true
         postImageView.heightAnchor.constraint(equalTo: self.widthAnchor).isActive=true
-        
-        textLabel.leftAnchor.constraint(equalTo: postImageView.leftAnchor).isActive=true
-        textLabel.topAnchor.constraint(equalTo: postImageView.bottomAnchor).isActive=true
-        textLabel.widthAnchor.constraint(equalToConstant: pictureHeight!).isActive=true
-        textLabel.heightAnchor.constraint(equalToConstant: 25).isActive=true
-        
-        detailTextLabel.leftAnchor.constraint(equalTo: textLabel.leftAnchor).isActive=true
-        detailTextLabel.topAnchor.constraint(equalTo: textLabel.bottomAnchor, constant: -8).isActive=true
-        detailTextLabel.widthAnchor.constraint(equalToConstant: pictureHeight!).isActive=true
-        detailTextLabel.heightAnchor.constraint(equalToConstant: 24).isActive=true
+
+        /*
+        if listLayoutInUse {
+            postImageView.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive=true
+            postImageView.topAnchor.constraint(equalTo: self.topAnchor).isActive=true
+            postImageView.widthAnchor.constraint(equalTo: self.widthAnchor).isActive=true
+            postImageView.heightAnchor.constraint(equalTo: self.widthAnchor).isActive=true
+            
+            textLabel.leftAnchor.constraint(equalTo: postImageView.leftAnchor).isActive=true
+            textLabel.topAnchor.constraint(equalTo: postImageView.bottomAnchor).isActive=true
+            textLabel.widthAnchor.constraint(equalToConstant: pictureHeight!).isActive=true
+            textLabel.heightAnchor.constraint(equalToConstant: 25).isActive=true
+            
+            detailTextLabel.leftAnchor.constraint(equalTo: textLabel.leftAnchor).isActive=true
+            detailTextLabel.topAnchor.constraint(equalTo: textLabel.bottomAnchor, constant: -8).isActive=true
+            detailTextLabel.widthAnchor.constraint(equalToConstant: pictureHeight!).isActive=true
+            detailTextLabel.heightAnchor.constraint(equalToConstant: 24).isActive=true
+        }
+        else {
+            postImageView.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive=true
+            postImageView.topAnchor.constraint(equalTo: self.topAnchor).isActive=true
+            postImageView.widthAnchor.constraint(equalTo: self.widthAnchor).isActive=true
+            postImageView.heightAnchor.constraint(equalTo: self.widthAnchor).isActive=true
+        }*/
     }
 }

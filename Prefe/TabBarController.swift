@@ -118,7 +118,7 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
             settingsImage = settingsImage?.withRenderingMode(UIImageRenderingMode.alwaysOriginal)
             navigationItem.rightBarButtonItem = UIBarButtonItem(image: settingsImage, style: .plain, target: self, action: #selector(handleSettings))
         }
-        else {
+        else if item.tag != 2 {
             setNavBar()
         }
     }

@@ -29,6 +29,8 @@
 		2AC00D8F1DCC5881006FEC10 /* ProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AC00D8E1DCC5881006FEC10 /* ProfileController.swift */; };
 		2AD1CC081DCDB35A00AA9774 /* MyPostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AD1CC071DCDB35A00AA9774 /* MyPostCell.swift */; };
 		2AD1CC0A1DCDD65600AA9774 /* ProfileHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AD1CC091DCDD65600AA9774 /* ProfileHeader.swift */; };
+		2AD1CC471DCFE0FD00AA9774 /* ListLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AD1CC461DCFE0FD00AA9774 /* ListLayout.swift */; };
+		2AD1CC491DCFE97A00AA9774 /* GridLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AD1CC481DCFE97A00AA9774 /* GridLayout.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -77,6 +79,8 @@
 		2AC00D8E1DCC5881006FEC10 /* ProfileController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileController.swift; sourceTree = "<group>"; };
 		2AD1CC071DCDB35A00AA9774 /* MyPostCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyPostCell.swift; sourceTree = "<group>"; };
 		2AD1CC091DCDD65600AA9774 /* ProfileHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileHeader.swift; sourceTree = "<group>"; };
+		2AD1CC461DCFE0FD00AA9774 /* ListLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListLayout.swift; sourceTree = "<group>"; };
+		2AD1CC481DCFE97A00AA9774 /* GridLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GridLayout.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -164,6 +168,8 @@
 				2A5EDE211DCC106A00F2C66E /* PostCell.swift */,
 				2AD1CC091DCDD65600AA9774 /* ProfileHeader.swift */,
 				2AD1CC071DCDB35A00AA9774 /* MyPostCell.swift */,
+				2AD1CC461DCFE0FD00AA9774 /* ListLayout.swift */,
+				2AD1CC481DCFE97A00AA9774 /* GridLayout.swift */,
 			);
 			name = Struct;
 			sourceTree = "<group>";
@@ -336,6 +342,8 @@
 				2A5EDE141DCBDDB100F2C66E /* SearchController.swift in Sources */,
 				2A5EDE181DCBDE1B00F2C66E /* NotificationController.swift in Sources */,
 				2A5EDE101DCBDCFE00F2C66E /* LoginController.swift in Sources */,
+				2AD1CC471DCFE0FD00AA9774 /* ListLayout.swift in Sources */,
+				2AD1CC491DCFE97A00AA9774 /* GridLayout.swift in Sources */,
 				2A5EDE241DCC10A600F2C66E /* MyProfileHeader.swift in Sources */,
 				2AC00D8F1DCC5881006FEC10 /* ProfileController.swift in Sources */,
 				2AD1CC0A1DCDD65600AA9774 /* ProfileHeader.swift in Sources */,

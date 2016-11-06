@@ -27,6 +27,7 @@ class ProfileController: UIViewController, UICollectionViewDataSource, UICollect
     
     var listButton: UIButton?
     var gridButton: UIButton?
+    var listLayoutInUse = true
     //var layoutControl: UISegmentedControl?
     
     override func viewDidLoad() {
@@ -34,9 +35,8 @@ class ProfileController: UIViewController, UICollectionViewDataSource, UICollect
         mainController?.changeSelected(select: 4)
         pictureHeight = (mainController?.screenWidth)! - 40
         
-        let layout = UICollectionViewFlowLayout()
-        layout.sectionInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
-        layout.itemSize = CGSize(width: pictureHeight!, height: pictureHeight!+40)
+        let layout = ListLayout()
+        layout.itemSize = CGSize(width: pictureHeight!, height: pictureHeight!+20)
         
         colView = UICollectionView(frame: self.view.frame, collectionViewLayout: layout)
         colView.delegate   = self
@@ -95,14 +95,14 @@ class ProfileController: UIViewController, UICollectionViewDataSource, UICollect
         listButton?.backgroundColor = UIColor.white
         listButton?.setImage(image, for: .normal)
         listButton?.translatesAutoresizingMaskIntoConstraints = false
-        listButton?.addTarget(self, action: #selector(handleChangeLayout), for: .touchDown)
+        listButton?.addTarget(self, action: #selector(handleChangeToList), for: .touchDown)
         
         gridButton = UIButton()
         image = UIImage(named: "gridlayout")
         gridButton?.backgroundColor = UIColor.white
         gridButton?.setImage(image, for: .normal)
         gridButton?.translatesAutoresizingMaskIntoConstraints = false
-        gridButton?.addTarget(self, action: #selector(handleChangeLayout), for: .touchDown)
+        gridButton?.addTarget(self, action: #selector(handleChangeToGrid), for: .touchDown)
     }
     
     func fetchUser() {
@@ -124,6 +124,16 @@ class ProfileController: UIViewController, UICollectionViewDataSource, UICollect
         self.posts.append(post)
         self.posts.append(post)
         self.posts.append(post)
+        self.posts.append(post)
+        self.posts.append(post)
+        self.posts.append(post)
+        self.posts.append(post)
+        self.posts.append(post)
+        self.posts.append(post)
+        self.posts.append(post)
+        self.posts.append(post)
+        self.posts.append(post)
+        self.posts.append(post)
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -139,19 +149,6 @@ class ProfileController: UIViewController, UICollectionViewDataSource, UICollect
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if indexPath.row == 1 {
-            let layout = UICollectionViewFlowLayout()
-            layout.sectionInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
-            layout.itemSize = CGSize(width: 100, height: 100)
-            
-            UIView.animate(withDuration: 0.3, animations: {() -> Void in
-                self.colView.collectionViewLayout.invalidateLayout()
-                self.colView.setCollectionViewLayout(layout, animated: true)
-            })
-        }
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -187,7 +184,30 @@ class ProfileController: UIViewController, UICollectionViewDataSource, UICollect
         return header
     }
     
-    func handleChangeLayout() {
-        print(123)
+    func handleChangeToList() {
+        if (!listLayoutInUse) {
+            let layout = ListLayout()
+            layout.itemSize = CGSize(width: pictureHeight!, height: pictureHeight!+20)
+        
+            UIView.animate(withDuration: 0, animations: {() -> Void in
+                self.colView.collectionViewLayout.invalidateLayout()
+                self.colView.setCollectionViewLayout(layout, animated: false)
+            })
+            listLayoutInUse = true
+        }
+    }
+    
+    func handleChangeToGrid() {
+        if listLayoutInUse {
+            let layout = GridLayout()
+            let gridCellHeight:CGFloat = ((mainController?.screenWidth)! - 60)/3
+            layout.itemSize = CGSize(width: gridCellHeight, height: gridCellHeight)
+        
+            UIView.animate(withDuration: 0, animations: {() -> Void in
+                self.colView.collectionViewLayout.invalidateLayout()
+                self.colView.setCollectionViewLayout(layout, animated: false)
+            })
+            listLayoutInUse = false
+        }
     }
 }
