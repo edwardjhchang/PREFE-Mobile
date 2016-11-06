@@ -18,7 +18,6 @@ class HomeController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         mainController?.changeSelected(select: 0)
-        mainController?.setNavBar()
         
         tableView.register(PostCell.self, forCellReuseIdentifier: cellId)
         fetchPosts()

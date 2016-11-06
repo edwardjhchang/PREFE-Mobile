@@ -104,6 +104,31 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
         
         let controllers = [item1, item2, item3, item4, item5]
         self.viewControllers = controllers
+        for i in 0...4 {
+            tabBar.items?[i].tag = i
+        }
+    }
+    
+    override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
+        if item.tag == 4 {
+            var friendsImage=UIImage(named: "findFriends.png")
+            friendsImage = friendsImage?.withRenderingMode(UIImageRenderingMode.alwaysOriginal)
+            navigationItem.leftBarButtonItem = UIBarButtonItem(image: friendsImage, style: .plain, target: self, action: #selector(handleFindFriends))
+            var settingsImage=UIImage(named: "settings.png")
+            settingsImage = settingsImage?.withRenderingMode(UIImageRenderingMode.alwaysOriginal)
+            navigationItem.rightBarButtonItem = UIBarButtonItem(image: settingsImage, style: .plain, target: self, action: #selector(handleSettings))
+        }
+        else {
+            setNavBar()
+        }
+    }
+    
+    func handleFindFriends(){
+        
+    }
+    
+    func handleSettings(){
+        
     }
     
     func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {

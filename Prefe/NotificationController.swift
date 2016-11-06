@@ -15,7 +15,6 @@ class NotificationController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         mainController?.changeSelected(select: 3)
-        mainController?.setNavBar()
         
         setupActivities()
     }

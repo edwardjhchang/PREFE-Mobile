@@ -79,7 +79,6 @@ class ProfileController: UIViewController, UICollectionViewDataSource, UICollect
     }
     
     func setupViews() {
-        setupNavBar()
         self.view.addSubview(colView)
         
         /*
@@ -104,23 +103,6 @@ class ProfileController: UIViewController, UICollectionViewDataSource, UICollect
         gridButton?.setImage(image, for: .normal)
         gridButton?.translatesAutoresizingMaskIntoConstraints = false
         gridButton?.addTarget(self, action: #selector(handleChangeLayout), for: .touchDown)
-    }
-    
-    func setupNavBar(){
-        var friendsImage=UIImage(named: "findFriends.png")
-        friendsImage = friendsImage?.withRenderingMode(UIImageRenderingMode.alwaysOriginal)
-        mainController?.navigationItem.leftBarButtonItem = UIBarButtonItem(image: friendsImage, style: .plain, target: self, action: #selector(handleFindFriends))
-        var settingsImage=UIImage(named: "settings.png")
-        settingsImage = settingsImage?.withRenderingMode(UIImageRenderingMode.alwaysOriginal)
-        mainController?.navigationItem.rightBarButtonItem = UIBarButtonItem(image: settingsImage, style: .plain, target: self, action: #selector(handleSettings))
-    }
-    
-    func handleFindFriends(){
-        
-    }
-    
-    func handleSettings(){
-        
     }
     
     func fetchUser() {
