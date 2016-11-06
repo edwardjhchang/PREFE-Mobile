@@ -6,4 +6,11 @@
 //  Copyright © 2016 Prefe. All rights reserved.
 //
 
-import Foundation
+import UIKit
+
+class User: NSObject {
+    var name: String?
+    var bio: String?
+    var organization: String?
+    var profilePictureUrl: String?
+}

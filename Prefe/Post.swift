@@ -6,4 +6,11 @@
 //  Copyright © 2016 Prefe. All rights reserved.
 //
 
-import Foundation
+import UIKit
+
+class Post: NSObject {
+    var posterID: String?
+    var caption: String?
+    var timestamp: String?
+    var url: String?
+}

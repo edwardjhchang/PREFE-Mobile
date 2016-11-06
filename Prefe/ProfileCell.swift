@@ -1,5 +1,5 @@
 //
-//  MyProfileHeader.swift
+//  ProfileCell.swift
 //  Prefe
 //
 //  Created by Edward Joon-Hyuk Chang on 03/11/2016.
@@ -8,22 +8,30 @@
 
 import UIKit
 
-class MyProfileHeader: UITableViewCell {
-/*    var user: User? {
-        didSet{
-            self.textLabel?.text = user?.name
-            self.detailTextLabel?.text = user?.bio
-            if (user?.profilePictureUrl) != nil {
-                self.postImageView.image = UIImage(named: "me")
-            }
-        }
-    }*/
+class ProfileCell: UICollectionViewCell{
     
-    override func layoutSubviews(){
-        super.layoutSubviews()
-        textLabel?.frame = CGRect(x: textLabel!.frame.origin.x, y: pictureHeight+30, width: textLabel!.frame.width, height: textLabel!.frame.height)
-        detailTextLabel?.frame = CGRect(x: textLabel!.frame.origin.x, y: pictureHeight+50, width: detailTextLabel!.frame.width, height: detailTextLabel!.frame.height)
+    override init(frame: CGRect){
+        super.init(frame: frame)
+        setupViews()
     }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    let textLabel: UILabel = {
+        let textLabel = UILabel()
+        textLabel.text = ""
+        textLabel.translatesAutoresizingMaskIntoConstraints = false
+        return textLabel
+    }()
+    
+    let detailTextLabel: UILabel = {
+        let detailTextLabel = UILabel()
+        detailTextLabel.text = ""
+        detailTextLabel.translatesAutoresizingMaskIntoConstraints = false
+        return detailTextLabel
+    }()
     
     let postImageView: UIImageView = {
         let imageView = UIImageView()
@@ -44,13 +52,23 @@ class MyProfileHeader: UITableViewCell {
     
     var pictureHeight:CGFloat = 74
     
-    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
-        super.init(style: .subtitle, reuseIdentifier: reuseIdentifier)
+    func setupViews(){
+        backgroundColor = UIColor.white
+        addSubview(textLabel)
+        addSubview(detailTextLabel)
         addSubview(postImageView)
         addSubview(headerLine)
         
-        // ios 9 constraint anchors
-        // need x, y, width, height anchors
+        textLabel.leftAnchor.constraint(equalTo: self.leftAnchor).isActive=true
+        textLabel.topAnchor.constraint(equalTo: self.topAnchor).isActive=true
+        textLabel.widthAnchor.constraint(equalToConstant: pictureHeight).isActive=true
+        textLabel.heightAnchor.constraint(equalToConstant: pictureHeight).isActive=true
+        
+        detailTextLabel.leftAnchor.constraint(equalTo: self.leftAnchor).isActive=true
+        detailTextLabel.topAnchor.constraint(equalTo: self.topAnchor).isActive=true
+        detailTextLabel.widthAnchor.constraint(equalToConstant: pictureHeight).isActive=true
+        detailTextLabel.heightAnchor.constraint(equalToConstant: pictureHeight).isActive=true
+        
         postImageView.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 20).isActive=true
         postImageView.topAnchor.constraint(equalTo: self.topAnchor, constant: 20).isActive=true
         postImageView.widthAnchor.constraint(equalToConstant: pictureHeight).isActive=true
@@ -60,9 +78,5 @@ class MyProfileHeader: UITableViewCell {
         headerLine.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -28).isActive = true
         headerLine.widthAnchor.constraint(equalTo: self.widthAnchor, constant: -32).isActive = true
         headerLine.heightAnchor.constraint(equalToConstant: 1).isActive = true
-    }
-    
-    required init(coder aDecoder: NSCoder){
-        fatalError("init(coder:) has not been implemented")
     }
 }

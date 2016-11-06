@@ -9,87 +9,44 @@
 import UIKit
 
 class SearchController: UITableViewController {
-
+    
+    var mainController: TabBarController?
+    
+    let inputTextField: UITextField={
+        let textField=UITextField()
+        textField.placeholder = "Search"
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        return textField
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        mainController?.changeSelected(select: 1)
+        view.addSubview(inputTextField)
+        setupInputTextField()
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
-    // MARK: - Table view data source
-
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 0
-    }
-
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 0
-    }
-
-    /*
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
-        // Configure the cell...
-
-        return cell
-    }
-    */
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
-}
+    func setupInputTextField() {
+        let containerView = UIView()
+        containerView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(containerView)
+        containerView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive=true
+        containerView.topAnchor.constraint(equalTo: view.topAnchor).isActive=true
+        containerView.widthAnchor.constraint(equalTo: view.widthAnchor).isActive=true
+        containerView.heightAnchor.constraint(equalToConstant: 50).isActive=true
+        
+        containerView.addSubview(inputTextField)
+        inputTextField.leftAnchor.constraint(equalTo: containerView.leftAnchor, constant: 12).isActive=true
+        inputTextField.topAnchor.constraint(equalTo: containerView.topAnchor).isActive=true
+        inputTextField.widthAnchor.constraint(equalTo: containerView.widthAnchor).isActive=true
+        inputTextField.heightAnchor.constraint(equalTo: containerView.heightAnchor).isActive=true
+        
+        let separatorLineView = UIView()
+        separatorLineView.backgroundColor = UIColor(r:220,g:220,b:220)
+        separatorLineView.translatesAutoresizingMaskIntoConstraints = false
+        containerView.addSubview(separatorLineView)
+        
+        separatorLineView.leftAnchor.constraint(equalTo: containerView.leftAnchor).isActive=true
+        separatorLineView.topAnchor.constraint(equalTo: containerView.bottomAnchor).isActive=true
+        separatorLineView.widthAnchor.constraint(equalTo: containerView.widthAnchor).isActive=true
+        separatorLineView.heightAnchor.constraint(equalToConstant: 1).isActive=true
+    }}
