@@ -16,6 +16,7 @@ class ProfileController: UIViewController, UICollectionViewDataSource, UICollect
     private let cellId = "CellId"
     private let headerId = "HeaderId"
     
+    var cells = [MyPostCell]()
     var user = User()
     var posts = [Post]()
     let rowSize: CGFloat = 210
@@ -25,6 +26,7 @@ class ProfileController: UIViewController, UICollectionViewDataSource, UICollect
     var pictureHeight: CGFloat?
     let maxCharInLine = 57
     
+    //var likeButton: UIButton?
     var listButton: UIButton?
     var gridButton: UIButton?
     var listLayoutInUse = true
@@ -95,14 +97,22 @@ class ProfileController: UIViewController, UICollectionViewDataSource, UICollect
         listButton?.backgroundColor = UIColor.white
         listButton?.setImage(image, for: .normal)
         listButton?.translatesAutoresizingMaskIntoConstraints = false
-        listButton?.addTarget(self, action: #selector(handleChangeToList), for: .touchDown)
+        listButton?.addTarget(self, action: #selector(handleChangeToList), for: .touchUpInside)
         
         gridButton = UIButton()
         image = UIImage(named: "gridlayout")
         gridButton?.backgroundColor = UIColor.white
         gridButton?.setImage(image, for: .normal)
         gridButton?.translatesAutoresizingMaskIntoConstraints = false
-        gridButton?.addTarget(self, action: #selector(handleChangeToGrid), for: .touchDown)
+        gridButton?.addTarget(self, action: #selector(handleChangeToGrid), for: .touchUpInside)
+        /*
+        likeButton = UIButton()
+        image = UIImage(named: "like")
+        likeButton?.backgroundColor = UIColor.blue
+        likeButton?.setImage(image, for: .normal)
+        likeButton?.translatesAutoresizingMaskIntoConstraints = false
+        //likeButton.addTarget(self, action: #selector(handleLikePicture), for: .touchUpInside)
+ */
     }
     
     func fetchUser() {
@@ -140,10 +150,11 @@ class ProfileController: UIViewController, UICollectionViewDataSource, UICollect
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! MyPostCell
         cell.pictureHeight = self.pictureHeight
         cell.setupViews()
-        cell.textLabel.text = "Edward Chang"
-        cell.detailTextLabel.text = "Caption"
+        cell.textLabel.text = "Date"
         cell.postImageView.image = UIImage(named: "me")
         cell.pictureHeight = (mainController?.screenWidth)!
+        //cell.likeButton = likeButton
+        self.cells.append(cell)
         return cell
     }
     
@@ -193,6 +204,9 @@ class ProfileController: UIViewController, UICollectionViewDataSource, UICollect
                 self.colView.collectionViewLayout.invalidateLayout()
                 self.colView.setCollectionViewLayout(layout, animated: false)
             })
+            for i in cells {
+                i.setupViews()
+            }
             listLayoutInUse = true
         }
     }
@@ -207,6 +221,11 @@ class ProfileController: UIViewController, UICollectionViewDataSource, UICollect
                 self.colView.collectionViewLayout.invalidateLayout()
                 self.colView.setCollectionViewLayout(layout, animated: false)
             })
+            for i in cells {
+                i.likeButton?.removeFromSuperview()
+                i.textLabel.removeFromSuperview()
+                i.listLayoutInUse = false
+            }
             listLayoutInUse = false
         }
     }
